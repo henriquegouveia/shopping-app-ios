@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ProductDetailViewController.swift
 //  ShoppingApp
 //
 //  Created by Henrique Cesar Gouveia on 26/06/18.
@@ -8,11 +8,18 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+protocol ProductDetailProtocol {
+    var product: ProductList.Product? { get set }
+}
 
+class ProductDetailViewController: UIViewController, ProductDetailProtocol {
+
+    var product: ProductList.Product?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +27,4 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
 }
-
