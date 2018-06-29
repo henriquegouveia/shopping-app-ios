@@ -24,7 +24,7 @@
 		BC97C1EB20E2C15500D9A392 /* HTTPRouteConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97C1D920E2C15500D9A392 /* HTTPRouteConvertible.swift */; };
 		BC97C1EC20E2C15500D9A392 /* HTTPBaseURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97C1DA20E2C15500D9A392 /* HTTPBaseURL.swift */; };
 		BC97C1ED20E2C15500D9A392 /* CBClientType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97C1DB20E2C15500D9A392 /* CBClientType.swift */; };
-		BC97C1EE20E2C15500D9A392 /* ProductClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97C1DE20E2C15500D9A392 /* ProductClient.swift */; };
+		BC97C1EE20E2C15500D9A392 /* SearchClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97C1DE20E2C15500D9A392 /* SearchClient.swift */; };
 		BC97C1EF20E2C15500D9A392 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97C1DF20E2C15500D9A392 /* HTTPClient.swift */; };
 		BC97C1F020E2C15500D9A392 /* CBServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97C1E020E2C15500D9A392 /* CBServerError.swift */; };
 		BC97C1F920E2E4D200D9A392 /* ProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97C1F820E2E4D200D9A392 /* ProductTableViewController.swift */; };
@@ -34,6 +34,9 @@
 		BC97C24120E42F7D00D9A392 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC97C24020E42F7D00D9A392 /* ProductTableViewCell.xib */; };
 		BCDB162420E442A20094DCA2 /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDB162320E442A20094DCA2 /* ProductListViewModel.swift */; };
 		BCDB162620E442B00094DCA2 /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDB162520E442B00094DCA2 /* ProductViewModel.swift */; };
+		BCDB162A20E45B400094DCA2 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCDB162920E45B400094DCA2 /* RxSwift.framework */; };
+		BCDB162C20E467D10094DCA2 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCDB162B20E467D10094DCA2 /* RxCocoa.framework */; };
+		BCDB162F20E5466C0094DCA2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BCDB162E20E5466C0094DCA2 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,7 +80,7 @@
 		BC97C1D920E2C15500D9A392 /* HTTPRouteConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRouteConvertible.swift; sourceTree = "<group>"; };
 		BC97C1DA20E2C15500D9A392 /* HTTPBaseURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPBaseURL.swift; sourceTree = "<group>"; };
 		BC97C1DB20E2C15500D9A392 /* CBClientType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBClientType.swift; sourceTree = "<group>"; };
-		BC97C1DE20E2C15500D9A392 /* ProductClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductClient.swift; sourceTree = "<group>"; };
+		BC97C1DE20E2C15500D9A392 /* SearchClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchClient.swift; sourceTree = "<group>"; };
 		BC97C1DF20E2C15500D9A392 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		BC97C1E020E2C15500D9A392 /* CBServerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBServerError.swift; sourceTree = "<group>"; };
 		BC97C1F820E2E4D200D9A392 /* ProductTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +90,9 @@
 		BC97C24020E42F7D00D9A392 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
 		BCDB162320E442A20094DCA2 /* ProductListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewModel.swift; sourceTree = "<group>"; };
 		BCDB162520E442B00094DCA2 /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
+		BCDB162920E45B400094DCA2 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		BCDB162B20E467D10094DCA2 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		BCDB162E20E5466C0094DCA2 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +100,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCDB162C20E467D10094DCA2 /* RxCocoa.framework in Frameworks */,
+				BCDB162A20E45B400094DCA2 /* RxSwift.framework in Frameworks */,
 				BC97C1BA20E2A74100D9A392 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,6 +182,8 @@
 		BC97C1B820E2A74100D9A392 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BCDB162B20E467D10094DCA2 /* RxCocoa.framework */,
+				BCDB162920E45B400094DCA2 /* RxSwift.framework */,
 				BC97C1B920E2A74100D9A392 /* Alamofire.framework */,
 			);
 			name = Frameworks;
@@ -193,6 +203,7 @@
 			children = (
 				BC6FDD8720E2835300297850 /* Assets.xcassets */,
 				BC6FDD8C20E2835300297850 /* Info.plist */,
+				BCDB162E20E5466C0094DCA2 /* Localizable.strings */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -231,7 +242,7 @@
 		BC97C1CB20E2C15500D9A392 /* ApiClient */ = {
 			isa = PBXGroup;
 			children = (
-				BC97C1DE20E2C15500D9A392 /* ProductClient.swift */,
+				BC97C1DE20E2C15500D9A392 /* SearchClient.swift */,
 			);
 			path = ApiClient;
 			sourceTree = "<group>";
@@ -427,6 +438,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCDB162F20E5466C0094DCA2 /* Localizable.strings in Resources */,
 				BC6FDD8B20E2835300297850 /* LaunchScreen.storyboard in Resources */,
 				BC97C24120E42F7D00D9A392 /* ProductTableViewCell.xib in Resources */,
 				BC6FDD8820E2835300297850 /* Assets.xcassets in Resources */,
@@ -458,6 +470,8 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 			);
 			name = "Carthage Run Script";
 			outputPaths = (
@@ -490,7 +504,7 @@
 				BCDB162620E442B00094DCA2 /* ProductViewModel.swift in Sources */,
 				BC97C1ED20E2C15500D9A392 /* CBClientType.swift in Sources */,
 				BC97C1EC20E2C15500D9A392 /* HTTPBaseURL.swift in Sources */,
-				BC97C1EE20E2C15500D9A392 /* ProductClient.swift in Sources */,
+				BC97C1EE20E2C15500D9A392 /* SearchClient.swift in Sources */,
 				BCDB162420E442A20094DCA2 /* ProductListViewModel.swift in Sources */,
 				BC6FDD8120E2835100297850 /* AppDelegate.swift in Sources */,
 			);

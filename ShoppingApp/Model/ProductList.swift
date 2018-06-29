@@ -9,10 +9,10 @@
 import Foundation
 
 struct ProductList: Decodable {
-    let currentPage: Int
-    let pageSize: Int
-    let totalResults: Int
-    let pageCount: Int
+    let currentPage: Int = 0
+    let pageSize: Int = 0
+    let totalResults: Int = 0
+    let pageCount: Int = 0
     var products = [Product]()
     
     struct Product: Decodable {
@@ -24,6 +24,15 @@ struct ProductList: Decodable {
         let coolbluesChoiceInformationTitle: String?
         let nextDayDelivery: Bool = false
         var especifications = [String?]()
+        
+        init(id: Int) {
+            productId = id
+            productName = "henrique \(productId)"
+            availabilityState = 0
+            productImage = ""
+            coolbluesChoiceInformationTitle = ""
+            especifications = ["gouveia"]
+        }
         
             enum CodingKeys : String, CodingKey {
                 case productId

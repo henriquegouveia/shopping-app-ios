@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoppingApp/Networking/CBClientType.swift"
-            timestampString = "551828513.444106"
+            timestampString = "551986909.113601"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "35"
@@ -57,29 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ShoppingApp/ViewController/Product/ProductTableViewController.swift"
-            timestampString = "551829520.5960881"
+            filePath = "ShoppingApp/ViewModel/Product/ProductListViewModel.swift"
+            timestampString = "551986909.113759"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "configureSearchBar()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ShoppingApp/View/Product/ProductCell/ProductTableViewCell.swift"
-            timestampString = "551828513.444559"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "loadData(product:)"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "getProducts(query:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
