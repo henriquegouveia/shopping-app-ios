@@ -22,9 +22,11 @@ class ProductTableViewCell: UITableViewCell {
 // MARK: - ProductCell Implemenation
 
 extension ProductTableViewCell: ProductCellProtocol {
-    func loadData(product: ProductViewModel) {
-        self.productName.text = product.productName
-        self.productDescription.text = product.productDescription
-        self.productImageView.image = product.productImage
+    func loadData(product: ProductList.Product) {
+        let viewModel = ProductViewModel(product: product)
+        
+        self.productName.text = viewModel.productName
+        self.productDescription.text = viewModel.productDescription
+        self.productImageView.image = viewModel.productImage
     }
 }

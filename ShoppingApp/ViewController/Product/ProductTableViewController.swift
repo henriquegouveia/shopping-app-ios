@@ -8,11 +8,13 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 
 // MARK: - Cell Protocol
 
 protocol ProductCellProtocol {
-    func loadData(product: ProductViewModel)
+    func loadData(product: ProductList.Product)
 }
 
 // MARK: Class
@@ -21,8 +23,9 @@ class ProductTableViewController: UITableViewController {
     
     // MARK: - Constant Properties
     
-    let searchController = UISearchController(searchResultsController: nil)
-    internal let productClient = ProductClient()
+    internal let searchController = UISearchController(searchResultsController: nil)
+    internal let searchClient = SearchClient()
+    internal let disposableBag = DisposeBag()
     
     // MARK: - Properties
     
@@ -34,6 +37,9 @@ class ProductTableViewController: UITableViewController {
         super.viewDidLoad()
         self.configureSearchBar()
         
+        self.bindProducts(with: self.viewModel)
+        
+        //register it on view
         self.tableView.register(UINib(nibName: "ProductTableViewCell", bundle: nil), forCellReuseIdentifier: "ProductTableViewCell")
     }
     
@@ -47,26 +53,33 @@ class ProductTableViewController: UITableViewController {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.products.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ProductTableViewCell")
-        if let cell = cell as? ProductCellProtocol {
-            cell.loadData(product: self.viewModel.products[indexPath.item])
-        }
-        
-        return cell!
-    }
-    
     // MARK: - Private Methods
+    
+    private func bindProducts(with viewModel: ProductListViewModel) {
+        viewModel.products
+            .bind(to: tableView.rx.items(cellIdentifier: String(describing: ProductTableViewCell.self),
+                                         cellType: ProductTableViewCell.self)) {index, product, cell in
+                cell.loadData(product: product)
+            }
+            .disposed(by: self.disposableBag)
+    }
+    
+    private func configureTable() {
+        self.tableView.delegate = nil
+        self.tableView.dataSource = nil
+    }
     
     private func configureSearchBar() {
         self.searchController.searchResultsUpdater = self
-        self.searchController.searchBar.placeholder = "Search Candies"
+        self.searchController.searchBar.placeholder = "Search Products"
         self.navigationItem.searchController = self.searchController
         self.definesPresentationContext = true
+        
+        self.searchController.searchBar.rx.text.orEmpty.subscribe(onNext: {[weak self] query in
+            guard let weakSelf = self else { return }
+            weakSelf.viewModel.getProducts(query: query)
+        }).disposed(by: disposableBag)
+        
     }
     
 }
