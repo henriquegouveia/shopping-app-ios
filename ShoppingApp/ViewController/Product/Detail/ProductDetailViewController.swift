@@ -7,13 +7,29 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ProductDetailViewController: UIViewController {
 
     private let _viewModel = ProductViewModel()
+    private let _disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.bindFields()
+    }
+    
+    private var customView: ProductDetailView {
+        return self.view as! ProductDetailView
+    }
+    
+    // MARK: - Private Functions
+    
+    private func bindFields() {
+        self._viewModel.productName.bind(to: self.customView.productNameLabel.rx.text).disposed(by: self._disposeBag)
+        self._viewModel.productText.bind(to: self.customView.productTextLabel.rx.text).disposed(by: self._disposeBag)
     }
 
 }
@@ -23,7 +39,7 @@ extension ProductDetailViewController: ProductDetailProtocol {
         return self._viewModel.productDetail
     }
     
-    func showProductDetails(product: ProductList.Product) {
+    func showProductDetails(product: Product) {
         self._viewModel.updateProduct(product: product)
     }
 }

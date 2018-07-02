@@ -35,7 +35,7 @@ class ProductTableViewCell: UITableViewCell {
 // MARK: - ProductCell Implemenation
 
 extension ProductTableViewCell: ProductCellProtocol {
-    func loadData(product: ProductList.Product) {
+    func loadData(product: Product) {
         self.imageView?.image = nil
         
         self.productName.text = product.productName

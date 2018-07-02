@@ -14,7 +14,7 @@ import RxCocoa
 // MARK: - Cell Protocol
 
 protocol ProductCellProtocol {
-    func loadData(product: ProductList.Product)
+    func loadData(product: Product)
 }
 
 // MARK: Class
@@ -81,7 +81,7 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
     }
     
     private func configureTableViewDelegate() {
-        self.tableView.rx.modelSelected(ProductList.Product.self).subscribe(onNext: { [weak self] (product) in
+        self.tableView.rx.modelSelected(Product.self).subscribe(onNext: { [weak self] (product) in
             guard let weakSelf = self else { return }
             weakSelf.delegate?.showProductDetails(product: product)
         }).disposed(by: self.disposableBag)

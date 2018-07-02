@@ -21,16 +21,16 @@ class ProductListViewModel {
     
     // MARK: Private Properties
     
-    private var _allProducts = [ProductList.Product]()
-    private let _products = Variable<[ProductList.Product]>([])
-    private let _filteredProducts = Variable<[ProductList.Product]>([])
+    private var _allProducts = [Product]()
+    private let _products = Variable<[Product]>([])
+    private let _filteredProducts = Variable<[Product]>([])
     private let _isLoading = Variable(false)
     private let _isFiltering = Variable(false)
     private let _error = PublishSubject<Error>()
     
     // MARK: Public Vars
     
-    var products: Observable<[ProductList.Product]> {
+    var products: Observable<[Product]> {
         return self._products.asObservable()
     }
     

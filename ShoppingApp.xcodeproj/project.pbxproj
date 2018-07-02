@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		BC27E0A920EA6F59006290CC /* Double+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC27E0A820EA6F59006290CC /* Double+Currency.swift */; };
+		BC27E0AF20EAC972006290CC /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC27E0AE20EAC972006290CC /* Product.swift */; };
+		BC27E0B120EAC987006290CC /* Specification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC27E0B020EAC987006290CC /* Specification.swift */; };
+		BC27E0B320EAC9B0006290CC /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC27E0B220EAC9B0006290CC /* Review.swift */; };
+		BC27E0B520EAC9BA006290CC /* ReviewInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC27E0B420EAC9BA006290CC /* ReviewInformation.swift */; };
+		BC27E0B720EAD175006290CC /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC27E0B620EAD175006290CC /* ProductDetailView.swift */; };
 		BC33CBF720EA69FA00F85292 /* ProductSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC33CBF620EA69FA00F85292 /* ProductSplitViewController.swift */; };
 		BC6FDD8120E2835100297850 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6FDD8020E2835100297850 /* AppDelegate.swift */; };
 		BC6FDD8620E2835100297850 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC6FDD8420E2835100297850 /* Main.storyboard */; };
@@ -67,6 +72,11 @@
 
 /* Begin PBXFileReference section */
 		BC27E0A820EA6F59006290CC /* Double+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Currency.swift"; sourceTree = "<group>"; };
+		BC27E0AE20EAC972006290CC /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		BC27E0B020EAC987006290CC /* Specification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Specification.swift; sourceTree = "<group>"; };
+		BC27E0B220EAC9B0006290CC /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		BC27E0B420EAC9BA006290CC /* ReviewInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewInformation.swift; sourceTree = "<group>"; };
+		BC27E0B620EAD175006290CC /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		BC33CBF620EA69FA00F85292 /* ProductSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSplitViewController.swift; sourceTree = "<group>"; };
 		BC6FDD7D20E2835100297850 /* ShoppingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC6FDD8020E2835100297850 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -146,6 +156,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BC27E0B820EAD979006290CC /* ImageCarousel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ImageCarousel;
+			sourceTree = "<group>";
+		};
 		BC33CBF520EA69D700F85292 /* List */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +316,10 @@
 			children = (
 				BC97C23920E3085E00D9A392 /* ProductList.swift */,
 				BCDA01E520E6EDBE009D4A59 /* ProductDetail.swift */,
+				BC27E0AE20EAC972006290CC /* Product.swift */,
+				BC27E0B020EAC987006290CC /* Specification.swift */,
+				BC27E0B220EAC9B0006290CC /* Review.swift */,
+				BC27E0B420EAC9BA006290CC /* ReviewInformation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -331,6 +352,7 @@
 		BC97C1F720E2E4BA00D9A392 /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				BC27E0B820EAD979006290CC /* ImageCarousel */,
 				BC33CBF520EA69D700F85292 /* List */,
 				BC97C23620E2EDDB00D9A392 /* Detail */,
 				BC33CBF620EA69FA00F85292 /* ProductSplitViewController.swift */,
@@ -350,6 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				BC97C23D20E42F5700D9A392 /* ProductCell */,
+				BC27E0B620EAD175006290CC /* ProductDetailView.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -547,10 +570,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC97C23A20E3085E00D9A392 /* ProductList.swift in Sources */,
+				BC27E0B720EAD175006290CC /* ProductDetailView.swift in Sources */,
 				BC97C1F020E2C15500D9A392 /* CBServerError.swift in Sources */,
 				BC97C1EF20E2C15500D9A392 /* HTTPClient.swift in Sources */,
 				BC27E0A920EA6F59006290CC /* Double+Currency.swift in Sources */,
 				BCDA01F820E9B5D1009D4A59 /* MediatorProtocol.swift in Sources */,
+				BC27E0B320EAC9B0006290CC /* Review.swift in Sources */,
+				BC27E0B520EAC9BA006290CC /* ReviewInformation.swift in Sources */,
 				BC97C1EB20E2C15500D9A392 /* HTTPRouteConvertible.swift in Sources */,
 				BC97C1C520E2C13A00D9A392 /* Alamofire+ExtraHeaders.swift in Sources */,
 				BCDA01E220E6C630009D4A59 /* BaseViewController.swift in Sources */,
@@ -559,6 +585,7 @@
 				BC97C1F920E2E4D200D9A392 /* ProductTableViewController.swift in Sources */,
 				BC97C1C320E2C13A00D9A392 /* URLSessionConfiguration+ExtraHeaders.swift in Sources */,
 				BC97C1E120E2C15500D9A392 /* CBClientError.swift in Sources */,
+				BC27E0AF20EAC972006290CC /* Product.swift in Sources */,
 				BC97C1EA20E2C15500D9A392 /* HTTPRoute.swift in Sources */,
 				BC97C23F20E42F6E00D9A392 /* ProductTableViewCell.swift in Sources */,
 				BC97C23820E2EDF300D9A392 /* ProductDetailViewController.swift in Sources */,
@@ -566,6 +593,7 @@
 				BC33CBF720EA69FA00F85292 /* ProductSplitViewController.swift in Sources */,
 				BC97C1C820E2C14C00D9A392 /* CustomErrorConvertible.swift in Sources */,
 				BCDB162620E442B00094DCA2 /* ProductViewModel.swift in Sources */,
+				BC27E0B120EAC987006290CC /* Specification.swift in Sources */,
 				BC97C1ED20E2C15500D9A392 /* CBClientType.swift in Sources */,
 				BC97C1EC20E2C15500D9A392 /* HTTPBaseURL.swift in Sources */,
 				BC97C1EE20E2C15500D9A392 /* SearchClient.swift in Sources */,

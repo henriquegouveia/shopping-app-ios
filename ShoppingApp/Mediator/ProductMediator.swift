@@ -11,7 +11,7 @@ import UIKit
 
 protocol ProductDetailProtocol: class {
     var product: ProductDetail? { get }
-    func showProductDetails(product: ProductList.Product)
+    func showProductDetails(product: Product)
 }
 
 struct ProductMediator: MediatorProtocol {
