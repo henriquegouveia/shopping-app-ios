@@ -21,8 +21,11 @@ class ProductListViewModel {
     
     // MARK: Private Properties
     
+    private var _allProducts = [ProductList.Product]()
     private let _products = Variable<[ProductList.Product]>([])
+    private let _filteredProducts = Variable<[ProductList.Product]>([])
     private let _isLoading = Variable(false)
+    private let _isFiltering = Variable(false)
     private let _error = PublishSubject<Error>()
     
     // MARK: Public Vars
@@ -30,14 +33,16 @@ class ProductListViewModel {
     var products: Observable<[ProductList.Product]> {
         return self._products.asObservable()
     }
+    
     var isLoading: Observable<Bool> {
         return self._isLoading.asObservable()
     }
+    
     var error: Observable<Error> {
         return self._error.asObservable()
     }
     
-    let title = "Products"
+    let title = NSLocalizedString("Products", comment: "")
     
     // MARK: - Constructors
     
@@ -52,16 +57,32 @@ class ProductListViewModel {
         self.totalPages = productList.pageCount
     }
     
+    func filterProducts(query: String) {
+        self._isFiltering.value = true
+        if (query.isEmpty) {
+            self._products.value = self._allProducts;
+        } else {
+            let result = self._allProducts.filter{ return $0.productName.lowercased().contains(query.lowercased()) }
+            self._products.value = result
+        }
+    }
+    
     // MARK: - Public Functions
+    
+    func bindSearchField(observer: Observable<Any>) {
+        
+    }
     
     func getProducts(query: String) {
         self._isLoading.value = true
         self.client?.getProducts(page: self.currentPage, query: query).subscribe(onNext: { (productList) in
+            self._allProducts.append(contentsOf: productList.products)
             self._products.value.append(contentsOf: productList.products)
+            self.currentPage += 1
         }, onError: { (error) in
-            //TODO Handle error
+            self._error.onNext(error)
         }, onCompleted: {
-            //TODO Handle the completed state
+            self._isLoading.value = false
         }).disposed(by: self.disposedBag)
     }
 }

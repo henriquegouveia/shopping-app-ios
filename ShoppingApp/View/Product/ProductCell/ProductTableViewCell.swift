@@ -8,14 +8,27 @@
 
 import Foundation
 import UIKit
+import RxNuke
+import Nuke
+import RxSwift
 
 class ProductTableViewCell: UITableViewCell {
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var productName: UILabel!
     @IBOutlet weak var productDescription: UILabel!
     
+    internal let disposeBag = DisposeBag()
+    
     override var reuseIdentifier: String? {
         return "ProductTableViewCell"
+    }
+    
+    // MARK: - Private Functions
+    
+    private func loadImageFromURL(_ url: URL) {
+        ImagePipeline.shared.rx.loadImage(with: url)
+            .subscribe(onSuccess: { self.productImageView.image = $0.image })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -24,9 +37,12 @@ class ProductTableViewCell: UITableViewCell {
 extension ProductTableViewCell: ProductCellProtocol {
     func loadData(product: ProductList.Product) {
         let viewModel = ProductViewModel(product: product)
+        self.imageView?.image = nil
         
         self.productName.text = viewModel.productName
         self.productDescription.text = viewModel.productDescription
-        self.productImageView.image = viewModel.productImage
+        if let imageURL = product.productImage, let url = URL(string: imageURL) {
+            self.loadImageFromURL(url)
+        }
     }
 }

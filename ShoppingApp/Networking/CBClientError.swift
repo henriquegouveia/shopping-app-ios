@@ -17,7 +17,7 @@ enum CBClientError: CustomErrorConvertible {
     case InternetConnectionError(CustomErrorConvertible)
     case AlamofireError(CustomErrorConvertible)
     
-    init(response: HTTPURLResponse?, data: Data?, error: Any?) {
+    init(response: HTTPURLResponse?, data: Data?, error: Error?) {
         if let _ = error as? Alamofire.AFError {
             if let serverError = CBServerError.serverErrorForResponse(response: response, data: data) {
                 self = .ServerError(serverError)

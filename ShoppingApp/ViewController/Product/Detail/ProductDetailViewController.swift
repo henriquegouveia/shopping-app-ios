@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol ProductDetailProtocol {
-    var product: ProductList.Product? { get set }
-}
-
 class ProductDetailViewController: UIViewController, ProductDetailProtocol {
 
     var product: ProductList.Product?
