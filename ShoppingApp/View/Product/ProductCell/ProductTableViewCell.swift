@@ -36,11 +36,10 @@ class ProductTableViewCell: UITableViewCell {
 
 extension ProductTableViewCell: ProductCellProtocol {
     func loadData(product: ProductList.Product) {
-        let viewModel = ProductViewModel(product: product)
         self.imageView?.image = nil
         
-        self.productName.text = viewModel.productName
-        self.productDescription.text = viewModel.productDescription
+        self.productName.text = product.productName
+        self.productDescription.text = product.salesPriceIncVat?.currency()
         if let imageURL = product.productImage, let url = URL(string: imageURL) {
             self.loadImageFromURL(url)
         }

@@ -9,8 +9,9 @@
 import Foundation
 import UIKit
 
-protocol ProductDetailProtocol {
-    var product: ProductList.Product? { get set }
+protocol ProductDetailProtocol: class {
+    var product: ProductDetail? { get }
+    func showProductDetails(product: ProductList.Product)
 }
 
 struct ProductMediator: MediatorProtocol {

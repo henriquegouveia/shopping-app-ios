@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC27E0A920EA6F59006290CC /* Double+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC27E0A820EA6F59006290CC /* Double+Currency.swift */; };
+		BC33CBF720EA69FA00F85292 /* ProductSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC33CBF620EA69FA00F85292 /* ProductSplitViewController.swift */; };
 		BC6FDD8120E2835100297850 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6FDD8020E2835100297850 /* AppDelegate.swift */; };
 		BC6FDD8620E2835100297850 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC6FDD8420E2835100297850 /* Main.storyboard */; };
 		BC6FDD8820E2835300297850 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC6FDD8720E2835300297850 /* Assets.xcassets */; };
@@ -64,6 +66,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BC27E0A820EA6F59006290CC /* Double+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Currency.swift"; sourceTree = "<group>"; };
+		BC33CBF620EA69FA00F85292 /* ProductSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSplitViewController.swift; sourceTree = "<group>"; };
 		BC6FDD7D20E2835100297850 /* ShoppingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC6FDD8020E2835100297850 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC6FDD8520E2835100297850 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -142,6 +146,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BC33CBF520EA69D700F85292 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				BC97C1F820E2E4D200D9A392 /* ProductTableViewController.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		BC6FDD7420E2835100297850 = {
 			isa = PBXGroup;
 			children = (
@@ -236,6 +248,7 @@
 				BC97C1C020E2C13A00D9A392 /* URLSessionConfiguration+ExtraHeaders.swift */,
 				BC97C1C120E2C13A00D9A392 /* AlamofireRequest+Decodable.swift */,
 				BC97C1C220E2C13A00D9A392 /* Alamofire+ExtraHeaders.swift */,
+				BC27E0A820EA6F59006290CC /* Double+Currency.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -318,8 +331,9 @@
 		BC97C1F720E2E4BA00D9A392 /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				BC33CBF520EA69D700F85292 /* List */,
 				BC97C23620E2EDDB00D9A392 /* Detail */,
-				BC97C1F820E2E4D200D9A392 /* ProductTableViewController.swift */,
+				BC33CBF620EA69FA00F85292 /* ProductSplitViewController.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -535,6 +549,7 @@
 				BC97C23A20E3085E00D9A392 /* ProductList.swift in Sources */,
 				BC97C1F020E2C15500D9A392 /* CBServerError.swift in Sources */,
 				BC97C1EF20E2C15500D9A392 /* HTTPClient.swift in Sources */,
+				BC27E0A920EA6F59006290CC /* Double+Currency.swift in Sources */,
 				BCDA01F820E9B5D1009D4A59 /* MediatorProtocol.swift in Sources */,
 				BC97C1EB20E2C15500D9A392 /* HTTPRouteConvertible.swift in Sources */,
 				BC97C1C520E2C13A00D9A392 /* Alamofire+ExtraHeaders.swift in Sources */,
@@ -548,6 +563,7 @@
 				BC97C23F20E42F6E00D9A392 /* ProductTableViewCell.swift in Sources */,
 				BC97C23820E2EDF300D9A392 /* ProductDetailViewController.swift in Sources */,
 				BCDA01E620E6EDBE009D4A59 /* ProductDetail.swift in Sources */,
+				BC33CBF720EA69FA00F85292 /* ProductSplitViewController.swift in Sources */,
 				BC97C1C820E2C14C00D9A392 /* CustomErrorConvertible.swift in Sources */,
 				BCDB162620E442B00094DCA2 /* ProductViewModel.swift in Sources */,
 				BC97C1ED20E2C15500D9A392 /* CBClientType.swift in Sources */,

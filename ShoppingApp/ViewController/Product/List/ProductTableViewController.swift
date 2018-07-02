@@ -21,6 +21,8 @@ protocol ProductCellProtocol {
 
 class ProductTableViewController: UITableViewController, BaseViewControllerProtocol {
     
+    weak var delegate: ProductDetailProtocol?
+    
     // MARK: - Constant Properties
     
     internal let searchController = UISearchController(searchResultsController: nil)
@@ -34,8 +36,10 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.configureSearchBar()
         self.configureTable()
+        self.configureTableViewDelegate()
         self.configureView()
         
         self.bindProducts(with: self.viewModel)
@@ -74,6 +78,13 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
                 cell.loadData(product: product)
             }
             .disposed(by: self.disposableBag)
+    }
+    
+    private func configureTableViewDelegate() {
+        self.tableView.rx.modelSelected(ProductList.Product.self).subscribe(onNext: { [weak self] (product) in
+            guard let weakSelf = self else { return }
+            weakSelf.delegate?.showProductDetails(product: product)
+        }).disposed(by: self.disposableBag)
     }
     
     private func configureTable() {

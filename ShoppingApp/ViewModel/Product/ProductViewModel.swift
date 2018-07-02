@@ -7,22 +7,39 @@
 //
 
 import Foundation
-import UIKit
+import RxSwift
 
-struct ProductViewModel {
-    let productName: String
-    let productDescription: String
-    var productImage: UIImage?
+class ProductViewModel {
+    private var _product: ProductList.Product?
+    private var _productDetail: ProductDetail?
+    private let _client = ProductClient()
+    private let _disposeBag = DisposeBag()
+    
+    var productDetail: ProductDetail? {
+        return self._productDetail
+    }
+    
+    // MARK: - Public Functions
+    
+    func updateProduct(product: ProductList.Product) {
+        self._product = product
+        self.fetchProductDetails()
+    }
+    
+    private func fetchProductDetails() {
+        guard let product = self._product else { return }
+        self._client?.getProductDetails(productId: product.productId).subscribe(onNext: { (productDetail) in
+            print(productDetail)
+        }, onError: { (error) in
+            print(error)
+        }, onCompleted: {
+            print("completed")
+        }, onDisposed: {
+            print("disposed")
+        }).disposed(by: self._disposeBag)
+    }
 }
 
 extension ProductViewModel {
-    init(product: ProductList.Product) {
-        self.productName = product.productName
-        let strings = product.especifications.map { (especification) -> String in
-            guard let string = especification else { return "" }
-            return string + "\n"
-        }
-        
-        self.productDescription = strings.joined()
-    }
+    
 }

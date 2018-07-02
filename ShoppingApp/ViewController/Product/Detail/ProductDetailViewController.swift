@@ -8,19 +8,22 @@
 
 import UIKit
 
-class ProductDetailViewController: UIViewController, ProductDetailProtocol {
+class ProductDetailViewController: UIViewController {
 
-    var product: ProductList.Product?
+    private let _viewModel = ProductViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+}
 
+extension ProductDetailViewController: ProductDetailProtocol {
+    var product: ProductDetail? {
+        return self._viewModel.productDetail
+    }
+    
+    func showProductDetails(product: ProductList.Product) {
+        self._viewModel.updateProduct(product: product)
+    }
 }
