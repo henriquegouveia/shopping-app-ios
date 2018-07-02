@@ -38,17 +38,6 @@ extension DataRequest {
         -> Self {
         let responseSerializer = DataResponseSerializer<[T]> { request, response, data, error in
             guard error == nil else { return .failure(CBClientError(response: response, data: data, error: error)) }
-
-            let jsonSerializer = DataRequest.jsonResponseSerializer(options: .allowFragments)
-            let result = jsonSerializer.serializeResponse(request, response, data, nil)
-
-            guard case let .success(jsonObject) = result else {
-                return .failure(CBClientError(response: response, data: data, error: error))
-            }
-
-            guard let responseUnwrapped = response else {
-                return .failure(CBClientError(response: response, data: data, error: error))
-            }
             
             guard let dataUnwrapped = data else {
                 return .failure(CBClientError(response: response, data: data, error: error))
@@ -63,12 +52,5 @@ extension DataRequest {
 
         return response(responseSerializer: responseSerializer, completionHandler: completionHandler)
     }
-//}
-
-// MARK: Response Serializable
-
-//protocol ResponseCollectionSerializable {
-//    static func collection(from response: HTTPURLResponse, withRepresentation representation: JSON) -> [Self]
-//}
 
 }

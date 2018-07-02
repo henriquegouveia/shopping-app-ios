@@ -57,7 +57,7 @@ class ProductListViewModel {
         self.totalPages = productList.pageCount
     }
     
-    func filterProducts(query: String) {
+    private func filter(query: String) {
         self._isFiltering.value = true
         if (query.isEmpty) {
             self._products.value = self._allProducts;
@@ -69,8 +69,8 @@ class ProductListViewModel {
     
     // MARK: - Public Functions
     
-    func bindSearchField(observer: Observable<Any>) {
-        
+    func filterProducts(query: String) {
+        self.filter(query: query)
     }
     
     func getProducts(query: String) {
