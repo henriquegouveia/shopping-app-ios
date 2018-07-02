@@ -57,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ShoppingApp/ViewModel/Product/ProductListViewModel.swift"
-            timestampString = "551986909.113759"
+            filePath = "ShoppingApp/ViewController/Product/ProductTableViewController.swift"
+            timestampString = "552066079.769762"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "getProducts(query:)"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "configureSearchBar()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

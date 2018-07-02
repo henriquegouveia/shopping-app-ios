@@ -18,8 +18,8 @@ extension SearchClientType {
     func getProducts(page: Int, query: String) -> Observable<ProductList> {
         return Observable.create({ (observer) -> Disposable in
             let route = Router.getProducts(page: page, query: query)
-            let request = self.sendRequestWithRoute(route: route) { (value: Result<ProductList>) in
-                switch value {
+            let request = self.sendRequestWithRoute(route: route) { (result: Result<ProductList>) in
+                switch result {
                 case .success(let productsList):
                     observer.onNext(productsList)
                     observer.onCompleted()

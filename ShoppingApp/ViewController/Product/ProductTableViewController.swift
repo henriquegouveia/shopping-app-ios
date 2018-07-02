@@ -19,28 +19,28 @@ protocol ProductCellProtocol {
 
 // MARK: Class
 
-class ProductTableViewController: UITableViewController {
+class ProductTableViewController: UITableViewController, BaseViewControllerProtocol {
     
     // MARK: - Constant Properties
     
     internal let searchController = UISearchController(searchResultsController: nil)
-    internal let searchClient = SearchClient()
     internal let disposableBag = DisposeBag()
     
     // MARK: - Properties
     
-    internal let viewModel = ProductListViewModel()
+    internal let viewModel = ProductListViewModel() 
     
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureSearchBar()
+        self.configureTable()
+        self.configureView()
         
         self.bindProducts(with: self.viewModel)
-        
-        //register it on view
-        self.tableView.register(UINib(nibName: "ProductTableViewCell", bundle: nil), forCellReuseIdentifier: "ProductTableViewCell")
+        self.bindLoading(with: self.viewModel)
+        self.bindError(with: self.viewModel)
     }
     
     // MARK: - Datasource Methods
@@ -55,6 +55,18 @@ class ProductTableViewController: UITableViewController {
     
     // MARK: - Private Methods
     
+    private func bindLoading(with viewModel: ProductListViewModel) {
+        viewModel.isLoading
+            .bind(to: self.rx_loading)
+            .disposed(by: self.disposableBag)
+    }
+    
+    private func bindError(with viewModel: ProductListViewModel) {
+        viewModel.error
+        .bind(to: self.rx_error)
+        .disposed(by: self.disposableBag)
+    }
+    
     private func bindProducts(with viewModel: ProductListViewModel) {
         viewModel.products
             .bind(to: tableView.rx.items(cellIdentifier: String(describing: ProductTableViewCell.self),
@@ -67,21 +79,34 @@ class ProductTableViewController: UITableViewController {
     private func configureTable() {
         self.tableView.delegate = nil
         self.tableView.dataSource = nil
+        
+        let cellIdentifier = String(describing: ProductTableViewCell.self)
+        let nib = UINib(nibName: cellIdentifier, bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
+    }
+    
+    private func configureView() {
+        self.navigationItem.title = self.viewModel.title
     }
     
     private func configureSearchBar() {
         self.searchController.searchResultsUpdater = self
+        self.searchController.obscuresBackgroundDuringPresentation = false
         self.searchController.searchBar.placeholder = "Search Products"
         self.navigationItem.searchController = self.searchController
         self.definesPresentationContext = true
         
-        self.searchController.searchBar.rx.text.orEmpty.subscribe(onNext: {[weak self] query in
-            guard let weakSelf = self else { return }
-            weakSelf.viewModel.getProducts(query: query)
+        self.searchController.searchBar
+            .rx
+            .text
+            .orEmpty
+            .debounce(0.5, scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .subscribe(onNext: {[weak self] query in
+                guard let weakSelf = self else { return }
+                weakSelf.viewModel.filterProducts(query: query)
         }).disposed(by: disposableBag)
-        
     }
-    
 }
 
 // MARK: - UISearchController implementation
