@@ -2,6 +2,8 @@
   Localizable.strings
   ShoppingApp
 
-  Created by Henrique Cesar Gouveia on 28/06/18.
+  Created by Henrique Cesar Gouveia on 30/06/18.
   Copyright © 2018 Henrique Gouveia. All rights reserved.
 */
+
+"Products" = "Produtos";
