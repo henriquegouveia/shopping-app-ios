@@ -1,1 +1,4 @@
 github "Alamofire/Alamofire" "4.7.2"
+github "ReactiveX/RxSwift" "4.2.0"
+github "kean/Nuke" "7.3"
+github "kean/RxNuke" "0.7"

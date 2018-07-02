@@ -1,1 +1,3 @@
+github "kean/RxNuke"
+github "ReactiveX/RxSwift"
 github "Alamofire/Alamofire"
