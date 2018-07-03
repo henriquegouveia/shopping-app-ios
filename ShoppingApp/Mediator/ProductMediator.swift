@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 protocol ProductDetailProtocol: class {
     var product: ProductDetail? { get }
@@ -15,7 +16,7 @@ protocol ProductDetailProtocol: class {
 }
 
 protocol ProductPageProtocol: class {
-    var productImages: [String] { get set }
+    func observableDatasouce(_ observable: Observable<[String]>)
 }
 
 protocol ProductImageProtocol: class {
@@ -24,8 +25,8 @@ protocol ProductImageProtocol: class {
 
 struct ProductMediator: MediatorProtocol {
     func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationVC = segue.destination as? ProductPageProtocol, let images = sender as? [String] {
-            destinationVC.productImages = images
+        if let destinationVC = segue.destination as? ProductPageProtocol, let observable = sender as? Observable<[String]> {
+            destinationVC.observableDatasouce(observable)
         }
     }
 }

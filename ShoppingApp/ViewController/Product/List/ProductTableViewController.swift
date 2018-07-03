@@ -103,7 +103,7 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
     private func configureSearchBar() {
         self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
-        self.searchController.searchBar.placeholder = "Search Products"
+        self.searchController.searchBar.placeholder = NSLocalizedString("Search Products", comment: "")
         self.navigationItem.searchController = self.searchController
         self.definesPresentationContext = true
         

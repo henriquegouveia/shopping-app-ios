@@ -32,6 +32,7 @@ class ProductViewModel {
     private let _productText = Variable<String>("")
     private let _deliveredWith = Variable<String>("")
     private let _hideNextDayDelivery = Variable(false)
+    private let _productImages = Variable<[String]>([])
     private let _disposeBag = DisposeBag()
     
     // MARK: - Public vars
@@ -60,6 +61,10 @@ class ProductViewModel {
         return self._hideNextDayDelivery.asObservable()
     }
     
+    var productImages: Observable<[String]> {
+        return self._productImages.asObservable()
+    }
+    
     // MARK: - Private Functions
     
     private func fetchProductDetails() {
@@ -86,6 +91,7 @@ class ProductViewModel {
     private func updateProductDetailsInformation(product: Product) {
         self._productText.value = product.productText ?? ""
         self._deliveredWith.value = self.formattedDeliveryWith(deliveredWith: product.deliveredWith)
+        self._productImages.value = product.productImages ?? []
     }
     
     private func formattedDeliveryWith(deliveredWith: [String?]?) -> String {

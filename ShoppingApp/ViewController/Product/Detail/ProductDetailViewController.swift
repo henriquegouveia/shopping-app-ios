@@ -25,9 +25,7 @@ class ProductDetailViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let a = "https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg"
-        let b = "https://www.allaboutbirds.org/sgapp/images/shape/icon-blackbirds.png"
-        self._mediator.prepare(for: segue, sender: [a,b])
+        self._mediator.prepare(for: segue, sender: self._viewModel.productImages)
     }
     
     // MARK: - Private Functions

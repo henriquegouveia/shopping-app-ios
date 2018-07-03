@@ -22,7 +22,7 @@ struct Product: Decodable {
     var reviewInformation: ReviewInformation?
     var pros: [String?]?
     var cons: [String?]?
-    var productImages: [String?]?
+    var productImages: [String]?
     var deliveredWith: [String?]?
     var specificationSummary: [Specification?]?
     var recommendedAccessories: [Int]?
