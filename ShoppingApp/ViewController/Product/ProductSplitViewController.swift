@@ -13,8 +13,9 @@ class ProductSplitViewController: UISplitViewController, UISplitViewControllerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.delegate = self
+        
+        self.setupDetailViewController()
     }
     
     private func assignDelegate(_ delegate: ProductDetailProtocol, for viewController: UIViewController) {
@@ -24,12 +25,16 @@ class ProductSplitViewController: UISplitViewController, UISplitViewControllerDe
         masterViewController.delegate = delegate
     }
     
+    private func setupDetailViewController() {
+        guard let masterController = self.viewControllers.first else { return }
+        guard let detailController = self.viewControllers.last as? ProductDetailProtocol else { return }
+        self.assignDelegate(detailController, for: masterController)
+    }
+    
     // MARK: - Split view
     
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController: UIViewController) -> Bool {
         guard let detailController = secondaryViewController as? ProductDetailProtocol else { return false }
-        
-        self.assignDelegate(detailController, for: primaryViewController)
         
         if detailController.product == nil {
             return true

@@ -30,6 +30,8 @@ class ProductViewModel {
     private let _productName = Variable<String>("")
     private let _price = Variable<String>("")
     private let _productText = Variable<String>("")
+    private let _deliveredWith = Variable<String>("")
+    private let _hideNextDayDelivery = Variable(false)
     private let _disposeBag = DisposeBag()
     
     // MARK: - Public vars
@@ -48,6 +50,14 @@ class ProductViewModel {
     
     var productText: Observable<String> {
         return self._productText.asObservable()
+    }
+    
+    var deliveredWith: Observable<String> {
+        return self._deliveredWith.asObservable()
+    }
+    
+    var hideNextDayDelivery: Observable<Bool> {
+        return self._hideNextDayDelivery.asObservable()
     }
     
     // MARK: - Private Functions
@@ -70,10 +80,18 @@ class ProductViewModel {
         guard let product = self._product else { return }
         self._productName.value = product.productName
         self._price.value = product.salesPriceIncVat?.currency() ?? ""
+        self._hideNextDayDelivery.value = product.nextDayDelivery
     }
     
     private func updateProductDetailsInformation(product: Product) {
         self._productText.value = product.productText ?? ""
+        self._deliveredWith.value = self.formattedDeliveryWith(deliveredWith: product.deliveredWith)
+    }
+    
+    private func formattedDeliveryWith(deliveredWith: [String?]?) -> String {
+        guard let delivredWith = deliveredWith else { return "" }
+        let string = delivredWith.compactMap{$0}.joined(separator: "\n")
+        return string
     }
     
     // MARK: - Public Functions

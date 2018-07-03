@@ -14,7 +14,18 @@ protocol ProductDetailProtocol: class {
     func showProductDetails(product: Product)
 }
 
+protocol ProductPageProtocol: class {
+    var productImages: [String] { get set }
+}
+
+protocol ProductImageProtocol: class {
+    var productImage: String { get set }
+}
+
 struct ProductMediator: MediatorProtocol {
     func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? ProductPageProtocol, let images = sender as? [String] {
+            destinationVC.productImages = images
+        }
     }
 }

@@ -16,7 +16,7 @@ struct Product: Decodable {
     let salesPriceExVat: Double?
     let productImage: String?
     let coolbluesChoiceInformationTitle: String?
-    let nextDayDelivery: Bool?
+    let nextDayDelivery: Bool
     var specifications = [String?]()
     let productText: String?
     var reviewInformation: ReviewInformation?

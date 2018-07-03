@@ -13,5 +13,7 @@ class ProductDetailView: UIView {
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var productTextLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var deliveredWithLabel: UILabel!
+    @IBOutlet weak var nextDayDeliveryImageView: UIImageView!
     
 }
