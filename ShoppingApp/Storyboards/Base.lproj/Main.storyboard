@@ -59,7 +59,7 @@
         <!--Product Detail View Controller-->
         <scene sceneID="LCG-hJ-26P">
             <objects>
-                <viewController id="OKi-pD-NeM" customClass="ProductDetailViewController" customModule="ShoppingApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OKi-pD-NeM" customClass="ProductDetailViewController" customModule="ShoppingApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OvA-QQ-MKS" customClass="ProductDetailView" customModule="ShoppingApp" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

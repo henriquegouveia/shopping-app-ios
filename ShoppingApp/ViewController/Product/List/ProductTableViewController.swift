@@ -74,8 +74,8 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
     private func bindProducts(with viewModel: ProductListViewModel) {
         viewModel.products
             .bind(to: tableView.rx.items(cellIdentifier: String(describing: ProductTableViewCell.self),
-                                         cellType: ProductTableViewCell.self)) {index, product, cell in
-                cell.loadData(product: product)
+                                         cellType: ProductTableViewCell.self)) { index, product, cell in
+                                            cell.loadData(product: product)
             }
             .disposed(by: self.disposableBag)
     }
@@ -83,6 +83,7 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
     private func configureTableViewDelegate() {
         self.tableView.rx.modelSelected(Product.self).subscribe(onNext: { [weak self] (product) in
             guard let weakSelf = self else { return }
+            weakSelf.showDetailsWhenIsCollapsed()
             weakSelf.delegate?.showProductDetails(product: product)
         }).disposed(by: self.disposableBag)
     }
@@ -117,6 +118,16 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
                 guard let weakSelf = self else { return }
                 weakSelf.viewModel.filterProducts(query: query)
         }).disposed(by: disposableBag)
+    }
+    
+    private func showDetailsWhenIsCollapsed() {
+        if self.splitViewController!.isCollapsed {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: String(describing: ProductDetailViewController.self))
+            guard let detailController = viewController as? ProductDetailProtocol else { return }
+            self.delegate = detailController
+            self.splitViewController?.showDetailViewController(viewController, sender: self)
+        }
     }
 }
 

@@ -29,7 +29,7 @@ class ProductPageViewController: UIPageViewController {
     
     private func setupViewControllers() {
         let viewControllers = self.productImages.map{ self.instantiateImageViewController(productImage: $0)! }
-        self._pages.append(contentsOf: viewControllers)
+        self._pages = viewControllers
         
         self.setViewControllers([viewControllers.first!], direction: .forward, animated: true, completion: nil)
     }
@@ -75,6 +75,7 @@ extension ProductPageViewController: ProductPageProtocol {
         observable.subscribe(onNext: { (images) in
             if images.count > 0 {
                 self.productImages = images
+                print(images)
             }
         }).disposed(by: self._disposeBag)
     }

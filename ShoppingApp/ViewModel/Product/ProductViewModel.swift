@@ -85,7 +85,7 @@ class ProductViewModel {
         guard let product = self._product else { return }
         self._productName.value = product.productName
         self._price.value = product.salesPriceIncVat?.currency() ?? ""
-        self._hideNextDayDelivery.value = product.nextDayDelivery
+        self._hideNextDayDelivery.value = !product.nextDayDelivery
     }
     
     private func updateProductDetailsInformation(product: Product) {
