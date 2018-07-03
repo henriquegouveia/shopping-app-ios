@@ -8,7 +8,6 @@
 
 import Foundation
 import RxSwift
-import RxCocoa
 
 class ProductListViewModel {
     
@@ -27,6 +26,14 @@ class ProductListViewModel {
     private let _isLoading = Variable(false)
     private let _isFiltering = Variable(false)
     private let _error = PublishSubject<Error>()
+    
+    // MARK: Constructors
+    
+    init(productList: ProductList) {
+        self.currentPage = productList.currentPage
+        self.totalPages = productList.totalResults
+        self.updateDataSource(products: productList.products)
+    }
     
     // MARK: Public Vars
     
@@ -67,6 +74,11 @@ class ProductListViewModel {
         }
     }
     
+    private func updateDataSource(products: [Product]) {
+        self._allProducts.append(contentsOf: products)
+        self._products.value.append(contentsOf: products)
+    }
+    
     // MARK: - Public Functions
     
     func filterProducts(query: String) {
@@ -75,10 +87,10 @@ class ProductListViewModel {
     
     func getProducts(query: String) {
         self._isLoading.value = true
-        self.client?.getProducts(page: self.currentPage, query: query).subscribe(onNext: { (productList) in
-            self._allProducts.append(contentsOf: productList.products)
-            self._products.value.append(contentsOf: productList.products)
-            self.currentPage += 1
+        self.client?.getProducts(page: self.currentPage, query: query).subscribe(onNext: { [weak self] (productList) in
+            guard let weakSelf = self else { return }
+            weakSelf.updateDataSource(products: productList.products)
+            weakSelf.currentPage += 1
         }, onError: { (error) in
             self._error.onNext(error)
         }, onCompleted: {
