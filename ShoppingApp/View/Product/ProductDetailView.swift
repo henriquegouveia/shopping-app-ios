@@ -15,5 +15,7 @@ class ProductDetailView: UIView {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var deliveredWithLabel: UILabel!
     @IBOutlet weak var nextDayDeliveryImageView: UIImageView!
+    @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
 }

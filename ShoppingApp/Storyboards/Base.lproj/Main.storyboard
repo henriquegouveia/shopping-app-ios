@@ -210,6 +210,19 @@
                                     <constraint firstItem="yiJ-NM-vH2" firstAttribute="height" secondItem="Q1o-kf-wu4" secondAttribute="height" priority="510" id="uNz-Oe-oYc"/>
                                 </constraints>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jrT-wJ-aMV">
+                                <rect key="frame" x="0.0" y="64" width="375" height="541"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="GaB-6P-fQv">
+                                        <rect key="frame" x="169" y="252" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.82679292299999996" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="GaB-6P-fQv" firstAttribute="centerY" secondItem="jrT-wJ-aMV" secondAttribute="centerY" id="c2n-OC-eRT"/>
+                                    <constraint firstItem="GaB-6P-fQv" firstAttribute="centerX" secondItem="jrT-wJ-aMV" secondAttribute="centerX" id="nGG-eF-sKY"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V5C-Ah-59V">
                                 <rect key="frame" x="0.0" y="605" width="375" height="62"/>
                                 <subviews>
@@ -245,17 +258,23 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="jrT-wJ-aMV" firstAttribute="top" secondItem="zEO-EK-5dT" secondAttribute="top" id="73j-vN-Wcv"/>
+                            <constraint firstItem="V5C-Ah-59V" firstAttribute="top" secondItem="jrT-wJ-aMV" secondAttribute="bottom" id="8t4-3Q-v6L"/>
                             <constraint firstItem="Q1o-kf-wu4" firstAttribute="top" secondItem="zEO-EK-5dT" secondAttribute="top" id="DDj-rg-V7I"/>
                             <constraint firstItem="V5C-Ah-59V" firstAttribute="leading" secondItem="zEO-EK-5dT" secondAttribute="leading" id="Ps7-fI-nNj"/>
                             <constraint firstItem="zEO-EK-5dT" firstAttribute="bottom" secondItem="V5C-Ah-59V" secondAttribute="bottom" id="RV4-sR-jM3"/>
                             <constraint firstItem="Q1o-kf-wu4" firstAttribute="trailing" secondItem="zEO-EK-5dT" secondAttribute="trailing" id="USN-hf-NI1"/>
                             <constraint firstItem="zEO-EK-5dT" firstAttribute="bottom" secondItem="Q1o-kf-wu4" secondAttribute="bottom" id="Yqe-Wd-cwM"/>
+                            <constraint firstItem="zEO-EK-5dT" firstAttribute="trailing" secondItem="jrT-wJ-aMV" secondAttribute="trailing" id="c3O-Uf-aCZ"/>
                             <constraint firstItem="Q1o-kf-wu4" firstAttribute="leading" secondItem="zEO-EK-5dT" secondAttribute="leading" id="ccZ-Ak-ZrI"/>
                             <constraint firstItem="V5C-Ah-59V" firstAttribute="trailing" secondItem="zEO-EK-5dT" secondAttribute="trailing" id="s46-hT-xR5"/>
+                            <constraint firstItem="jrT-wJ-aMV" firstAttribute="leading" secondItem="zEO-EK-5dT" secondAttribute="leading" id="uLO-ga-nye"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zEO-EK-5dT"/>
                         <connections>
+                            <outlet property="activityIndicator" destination="GaB-6P-fQv" id="dL2-pA-K2S"/>
                             <outlet property="deliveredWithLabel" destination="JIj-NW-7hZ" id="FKL-VP-l7Z"/>
+                            <outlet property="loadingView" destination="jrT-wJ-aMV" id="KC7-4w-cmJ"/>
                             <outlet property="nextDayDeliveryImageView" destination="dRD-Ud-meE" id="90O-8m-9SO"/>
                             <outlet property="priceLabel" destination="g9J-CR-e6N" id="emu-Mm-uZl"/>
                             <outlet property="productNameLabel" destination="EyP-aS-G5g" id="2GF-Uv-qRx"/>

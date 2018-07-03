@@ -41,6 +41,12 @@ class ProductDetailViewController: UIViewController {
         self._viewModel.price.bind(to: self.customView.priceLabel.rx.text).disposed(by: self._disposeBag)
         self._viewModel.deliveredWith.bind(to: self.customView.deliveredWithLabel.rx.text).disposed(by: self._disposeBag)
         self._viewModel.hideNextDayDelivery.bind(to: self.customView.nextDayDeliveryImageView.rx.isHidden).disposed(by: self._disposeBag)
+        self._viewModel.isLoading.subscribe(onNext: { [weak self] (isLoading) in
+            guard let weakSelf = self else { return }
+            isLoading ? weakSelf.customView.activityIndicator.startAnimating() : weakSelf.customView.activityIndicator.stopAnimating()
+            weakSelf.customView.loadingView.isHidden = !isLoading
+        }).disposed(by: self._disposeBag)
+        
     }
 
 }

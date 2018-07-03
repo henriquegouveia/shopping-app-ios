@@ -25,8 +25,12 @@ protocol ProductImageProtocol: class {
 
 struct ProductMediator: MediatorProtocol {
     func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationVC = segue.destination as? ProductPageProtocol, let observable = sender as? Observable<[String]> {
-            destinationVC.observableDatasouce(observable)
+        print(segue.identifier ?? "")
+    }
+    
+    func prepare(for segue: UIStoryboardSegue, sender: Observable<[String]>) {
+        if let destinationVC = segue.destination as? ProductPageProtocol {
+            destinationVC.observableDatasouce(sender)
         }
     }
 }

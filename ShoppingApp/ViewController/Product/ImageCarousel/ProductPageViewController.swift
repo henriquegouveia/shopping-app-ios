@@ -28,10 +28,14 @@ class ProductPageViewController: UIPageViewController {
     // MARK: - Private Functions
     
     private func setupViewControllers() {
-        let viewControllers = self.productImages.map{ self.instantiateImageViewController(productImage: $0)! }
-        self._pages = viewControllers
-        
-        self.setViewControllers([viewControllers.first!], direction: .forward, animated: true, completion: nil)
+        if (self.productImages.count == 0) {
+            self._pages = []
+        } else {
+            let viewControllers = self.productImages.map{ self.instantiateImageViewController(productImage: $0)! }
+            self._pages = viewControllers
+            
+            self.setViewControllers([viewControllers.first!], direction: .forward, animated: false, completion: nil)
+        }
     }
     
     private func instantiateImageViewController(productImage: String?) -> UIViewController? {
@@ -73,10 +77,7 @@ extension ProductPageViewController: UIPageViewControllerDataSource {
 extension ProductPageViewController: ProductPageProtocol {
     func observableDatasouce(_ observable: Observable<[String]>) {
         observable.subscribe(onNext: { (images) in
-            if images.count > 0 {
-                self.productImages = images
-                print(images)
-            }
+            self.productImages = images
         }).disposed(by: self._disposeBag)
     }
 }

@@ -65,19 +65,29 @@ class ProductViewModel {
         return self._productImages.asObservable()
     }
     
+    var isLoading: Observable<Bool> {
+        return self._isLoading.asObservable()
+    }
+    
     // MARK: - Private Functions
+    
+    private func resetFields() {
+        self._productName.value = ""
+        self._price.value = ""
+        self._productText.value = ""
+        self._productImages.value = []
+    }
     
     private func fetchProductDetails() {
         guard let product = self._product else { return }
+        self._isLoading.value = true
         self._client?.getProductDetails(productId: product.productId).subscribe(onNext: { [weak self] (productDetail) in
             guard let weakSelf = self else { return }
             weakSelf.updateProductDetailsInformation(product: productDetail.product)
+            weakSelf._isLoading.value = false
         }, onError: { (error) in
             self._error.onNext(error)
-        }, onCompleted: {
-            print("completed")
-        }, onDisposed: {
-            print("disposed")
+            self._isLoading.value = false
         }).disposed(by: self._disposeBag)
     }
     
@@ -103,6 +113,8 @@ class ProductViewModel {
     // MARK: - Public Functions
     
     func updateProduct(product: Product) {
+        self.resetFields()
+        
         self._product = product
         self.fetchProductDetails()
     }
