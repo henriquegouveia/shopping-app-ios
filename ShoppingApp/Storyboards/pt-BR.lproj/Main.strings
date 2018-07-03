@@ -1,0 +1,9 @@
+
+/* Class = "UIButton"; normalTitle = "Buy"; ObjectID = "Qmd-J1-PEL"; */
+"Qmd-J1-PEL.normalTitle" = "Buy";
+
+/* Class = "UILabel"; text = "Value"; ObjectID = "g9J-CR-e6N"; */
+"g9J-CR-e6N.text" = "Value";
+
+/* Class = "UINavigationItem"; title = "Root View Controller"; ObjectID = "nju-qh-ezT"; */
+"nju-qh-ezT.title" = "Root View Controller";
