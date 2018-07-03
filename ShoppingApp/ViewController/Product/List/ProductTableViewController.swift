@@ -72,12 +72,16 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
     }
     
     private func bindProducts(with viewModel: ProductListViewModel) {
-        viewModel.products
-            .bind(to: tableView.rx.items(cellIdentifier: String(describing: ProductTableViewCell.self),
+        viewModel.products.bind(to: tableView.rx.items(cellIdentifier: String(describing: ProductTableViewCell.self),
                                          cellType: ProductTableViewCell.self)) { index, product, cell in
                                             cell.loadData(product: product)
             }
             .disposed(by: self.disposableBag)
+    }
+    
+    private func selectFirstRow() {
+        let indexPath = IndexPath(row: 0, section: 0)
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
     }
     
     private func configureTableViewDelegate() {
@@ -85,6 +89,13 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
             guard let weakSelf = self else { return }
             weakSelf.showDetailsWhenIsCollapsed()
             weakSelf.delegate?.showProductDetails(product: product)
+        }).disposed(by: self.disposableBag)
+        
+        self.tableView.rx.willDisplayCell.subscribe(onNext:  { [weak self] (cellInfo)  in
+            guard let weakSelf = self else { return }
+            if (cellInfo.indexPath.item == weakSelf.viewModel.endIndex) {
+                weakSelf.viewModel.getProducts()
+            }
         }).disposed(by: self.disposableBag)
     }
     

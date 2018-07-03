@@ -9,9 +9,9 @@
 import Foundation
 
 struct ProductList: Decodable {
-    let currentPage: Int = 0
-    let pageSize: Int = 0
-    let totalResults: Int = 0
-    let pageCount: Int = 0
+    var currentPage: Int
+    var pageSize: Int
+    var totalResults: Int
+    var pageCount: Int = 0
     var products = [Product]()
 }
