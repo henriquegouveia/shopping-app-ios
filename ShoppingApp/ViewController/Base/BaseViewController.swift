@@ -26,10 +26,8 @@ extension BaseViewControllerProtocol {
             case .next(let value):
                 guard let controller = self as? UIViewController else { return }
                 controller.view.isUserInteractionEnabled = !value
-                controller.view.backgroundColor = value ? UIColor.black : UIColor.clear
             case .error(let error):
-                let error = "Binding error to UI: \(error)"
-                print(error)
+                self.showMessageError(error: error)
             case .completed:
                 break
             }

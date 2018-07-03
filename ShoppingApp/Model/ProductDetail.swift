@@ -9,18 +9,5 @@
 import Foundation
 
 struct ProductDetail: Decodable {
-    let description: String
-    let productText: String
-    let pros = [String?]()
-    let cons = [String?]()
-    let productImages = [String?]()
-    let recommendedAccessories = [String?]()
-    let deliveredWith = [String?]()
-    let salesPriceExVat: Double
-    let specificationSummary = [Specification]()
-    
-    struct Specification: Decodable {
-        let name: String
-        let value: String
-    }
+    let product: Product
 }

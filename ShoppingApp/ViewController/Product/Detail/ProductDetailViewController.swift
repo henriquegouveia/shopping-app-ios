@@ -7,20 +7,56 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-class ProductDetailViewController: UIViewController, ProductDetailProtocol {
+class ProductDetailViewController: UIViewController {
 
-    var product: ProductList.Product?
+    private let _viewModel = ProductViewModel()
+    private let _mediator = ProductMediator()
+    private let _disposeBag = DisposeBag()
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.bindFields()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        self._mediator.prepare(for: segue, sender: self._viewModel.productImages)
+    }
+    
+    // MARK: - Private Functions
+    
+    private var customView: ProductDetailView {
+        return self.view as! ProductDetailView
+    }
+    
+    
+    private func bindFields() {
+        self._viewModel.productName.bind(to: self.customView.productNameLabel.rx.text).disposed(by: self._disposeBag)
+        self._viewModel.productText.bind(to: self.customView.productTextLabel.rx.text).disposed(by: self._disposeBag)
+        self._viewModel.price.bind(to: self.customView.priceLabel.rx.text).disposed(by: self._disposeBag)
+        self._viewModel.deliveredWith.bind(to: self.customView.deliveredWithLabel.rx.text).disposed(by: self._disposeBag)
+        self._viewModel.hideNextDayDelivery.bind(to: self.customView.nextDayDeliveryImageView.rx.isHidden).disposed(by: self._disposeBag)
+        self._viewModel.isLoading.subscribe(onNext: { [weak self] (isLoading) in
+            guard let weakSelf = self else { return }
+            isLoading ? weakSelf.customView.activityIndicator.startAnimating() : weakSelf.customView.activityIndicator.stopAnimating()
+            weakSelf.customView.loadingView.isHidden = !isLoading
+        }).disposed(by: self._disposeBag)
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+}
 
+extension ProductDetailViewController: ProductDetailProtocol {
+    var product: ProductDetail? {
+        return self._viewModel.productDetail
+    }
+    
+    func showProductDetails(product: Product) {
+        self._viewModel.updateProduct(product: product)
+    }
 }

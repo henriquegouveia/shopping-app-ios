@@ -21,12 +21,12 @@ extension DataRequest {
                 return .failure(CBClientError(response: response, data: data, error: error))
             }
 
-            let decoder = JSONDecoder()
-            guard let responseObject = try? decoder.decode(T.self, from: dataUnwrapped) else {
-                return .failure(CBClientError(response: response, data: data, error: error))
+            do {
+                let response = try JSONDecoder().decode(T.self, from: dataUnwrapped)
+                return Result.success(response) as! Result<T>
+            } catch let convertibleError {
+                return .failure(CBClientError(response: response, data: data, error: convertibleError))
             }
-
-            return .success(responseObject)
         }
 
         return response(queue: queue, responseSerializer: responseSerializer, completionHandler: completionHandler)

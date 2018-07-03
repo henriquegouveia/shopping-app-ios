@@ -14,35 +14,4 @@ struct ProductList: Decodable {
     let totalResults: Int = 0
     let pageCount: Int = 0
     var products = [Product]()
-    
-    struct Product: Decodable {
-        let productId: Int
-        let productName: String
-        let availabilityState: Int
-        let salesPriceIncVat: Int = 0
-        let productImage: String?
-        let coolbluesChoiceInformationTitle: String?
-        let nextDayDelivery: Bool = false
-        var especifications = [String?]()
-        
-        init(id: Int) {
-            productId = id
-            productName = "henrique \(productId)"
-            availabilityState = 0
-            productImage = ""
-            coolbluesChoiceInformationTitle = ""
-            especifications = ["gouveia"]
-        }
-        
-            enum CodingKeys : String, CodingKey {
-                case productId
-                case productName
-                case availabilityState
-                case salesPriceIncVat
-                case productImage
-                case coolbluesChoiceInformationTitle
-                case nextDayDelivery
-                case especifications = "USPs"
-            }
-    }
 }
