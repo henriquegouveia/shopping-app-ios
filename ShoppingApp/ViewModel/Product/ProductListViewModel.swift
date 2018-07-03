@@ -81,6 +81,10 @@ class ProductListViewModel {
     
     // MARK: - Public Functions
     
+    func didEndSearching() {
+        self._products.value = self._allProducts
+    }
+    
     func filterProducts(query: String) {
         self.filter(query: query)
     }

@@ -102,7 +102,6 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
     }
     
     private func configureSearchBar() {
-        self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
         self.searchController.searchBar.placeholder = NSLocalizedString("Search Products", comment: "")
         self.navigationItem.searchController = self.searchController
@@ -118,6 +117,11 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
                 guard let weakSelf = self else { return }
                 weakSelf.viewModel.filterProducts(query: query)
         }).disposed(by: disposableBag)
+        
+        self.searchController.searchBar.rx.cancelButtonClicked.subscribe(onNext: { [weak self] (_) in
+            guard let weakSelf = self else { return }
+            weakSelf.viewModel.didEndSearching()
+        }).disposed(by: disposableBag)
     }
     
     private func showDetailsWhenIsCollapsed() {
@@ -128,14 +132,5 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
             self.delegate = detailController
             self.splitViewController?.showDetailViewController(viewController, sender: self)
         }
-    }
-}
-
-// MARK: - UISearchController implementation
-
-extension ProductTableViewController: UISearchResultsUpdating {
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        print(searchController.searchBar.text!)
     }
 }
