@@ -8,7 +8,6 @@
 
 import Foundation
 import RxSwift
-import RxCocoa
 
 class ProductListViewModel {
     
@@ -21,16 +20,24 @@ class ProductListViewModel {
     
     // MARK: Private Properties
     
-    private var _allProducts = [ProductList.Product]()
-    private let _products = Variable<[ProductList.Product]>([])
-    private let _filteredProducts = Variable<[ProductList.Product]>([])
+    private var _allProducts = [Product]()
+    private let _products = Variable<[Product]>([])
+    private let _filteredProducts = Variable<[Product]>([])
     private let _isLoading = Variable(false)
     private let _isFiltering = Variable(false)
     private let _error = PublishSubject<Error>()
     
+    // MARK: Constructors
+    
+    init(productList: ProductList) {
+        self.currentPage = productList.currentPage
+        self.totalPages = productList.totalResults
+        self.updateDataSource(products: productList.products)
+    }
+    
     // MARK: Public Vars
     
-    var products: Observable<[ProductList.Product]> {
+    var products: Observable<[Product]> {
         return self._products.asObservable()
     }
     
@@ -67,7 +74,16 @@ class ProductListViewModel {
         }
     }
     
+    private func updateDataSource(products: [Product]) {
+        self._allProducts.append(contentsOf: products)
+        self._products.value.append(contentsOf: products)
+    }
+    
     // MARK: - Public Functions
+    
+    func didEndSearching() {
+        self._products.value = self._allProducts
+    }
     
     func filterProducts(query: String) {
         self.filter(query: query)
@@ -75,10 +91,10 @@ class ProductListViewModel {
     
     func getProducts(query: String) {
         self._isLoading.value = true
-        self.client?.getProducts(page: self.currentPage, query: query).subscribe(onNext: { (productList) in
-            self._allProducts.append(contentsOf: productList.products)
-            self._products.value.append(contentsOf: productList.products)
-            self.currentPage += 1
+        self.client?.getProducts(page: self.currentPage, query: query).subscribe(onNext: { [weak self] (productList) in
+            guard let weakSelf = self else { return }
+            weakSelf.updateDataSource(products: productList.products)
+            weakSelf.currentPage += 1
         }, onError: { (error) in
             self._error.onNext(error)
         }, onCompleted: {

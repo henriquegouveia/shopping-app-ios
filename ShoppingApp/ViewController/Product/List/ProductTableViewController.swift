@@ -14,12 +14,14 @@ import RxCocoa
 // MARK: - Cell Protocol
 
 protocol ProductCellProtocol {
-    func loadData(product: ProductList.Product)
+    func loadData(product: Product)
 }
 
 // MARK: Class
 
 class ProductTableViewController: UITableViewController, BaseViewControllerProtocol {
+    
+    weak var delegate: ProductDetailProtocol?
     
     // MARK: - Constant Properties
     
@@ -34,8 +36,10 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.configureSearchBar()
         self.configureTable()
+        self.configureTableViewDelegate()
         self.configureView()
         
         self.bindProducts(with: self.viewModel)
@@ -70,10 +74,18 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
     private func bindProducts(with viewModel: ProductListViewModel) {
         viewModel.products
             .bind(to: tableView.rx.items(cellIdentifier: String(describing: ProductTableViewCell.self),
-                                         cellType: ProductTableViewCell.self)) {index, product, cell in
-                cell.loadData(product: product)
+                                         cellType: ProductTableViewCell.self)) { index, product, cell in
+                                            cell.loadData(product: product)
             }
             .disposed(by: self.disposableBag)
+    }
+    
+    private func configureTableViewDelegate() {
+        self.tableView.rx.modelSelected(Product.self).subscribe(onNext: { [weak self] (product) in
+            guard let weakSelf = self else { return }
+            weakSelf.showDetailsWhenIsCollapsed()
+            weakSelf.delegate?.showProductDetails(product: product)
+        }).disposed(by: self.disposableBag)
     }
     
     private func configureTable() {
@@ -90,9 +102,8 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
     }
     
     private func configureSearchBar() {
-        self.searchController.searchResultsUpdater = self
         self.searchController.obscuresBackgroundDuringPresentation = false
-        self.searchController.searchBar.placeholder = "Search Products"
+        self.searchController.searchBar.placeholder = NSLocalizedString("Search Products", comment: "")
         self.navigationItem.searchController = self.searchController
         self.definesPresentationContext = true
         
@@ -106,14 +117,20 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
                 guard let weakSelf = self else { return }
                 weakSelf.viewModel.filterProducts(query: query)
         }).disposed(by: disposableBag)
+        
+        self.searchController.searchBar.rx.cancelButtonClicked.subscribe(onNext: { [weak self] (_) in
+            guard let weakSelf = self else { return }
+            weakSelf.viewModel.didEndSearching()
+        }).disposed(by: disposableBag)
     }
-}
-
-// MARK: - UISearchController implementation
-
-extension ProductTableViewController: UISearchResultsUpdating {
     
-    func updateSearchResults(for searchController: UISearchController) {
-        print(searchController.searchBar.text!)
+    private func showDetailsWhenIsCollapsed() {
+        if self.splitViewController!.isCollapsed {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: String(describing: ProductDetailViewController.self))
+            guard let detailController = viewController as? ProductDetailProtocol else { return }
+            self.delegate = detailController
+            self.splitViewController?.showDetailViewController(viewController, sender: self)
+        }
     }
 }
