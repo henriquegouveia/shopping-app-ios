@@ -33,7 +33,6 @@ class ProductListViewModel {
     // MARK: Constructors
     
     init(productList: ProductList) {
-        self.currentPage = productList.currentPage
         self.totalPages = productList.pageCount
         self.updateDataSource(productList: productList)
     }
