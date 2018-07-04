@@ -75,7 +75,8 @@ extension ProductPageViewController: UIPageViewControllerDataSource {
 // MARK: - Page Protocol Impl
 
 extension ProductPageViewController: ProductPageProtocol {
-    func observableDatasouce(_ observable: Observable<[String]>) {
+    func observableDatasouce<T>(_ observable: Observable<[T]>) {
+        guard let observable = observable as? Observable<[String]> else { return }
         observable.subscribe(onNext: { (images) in
             self.productImages = images
         }).disposed(by: self._disposeBag)

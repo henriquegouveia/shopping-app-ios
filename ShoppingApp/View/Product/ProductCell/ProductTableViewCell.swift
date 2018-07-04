@@ -17,7 +17,7 @@ class ProductTableViewCell: UITableViewCell {
     @IBOutlet weak var productName: UILabel!
     @IBOutlet weak var productDescription: UILabel!
     
-    internal let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override var reuseIdentifier: String? {
         return "ProductTableViewCell"

@@ -32,9 +32,9 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHN-Au-3ha">
-                        <rect key="frame" x="137" y="34.5" width="222" height="16"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHN-Au-3ha">
+                        <rect key="frame" x="137" y="88" width="222" height="24"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -43,10 +43,10 @@
                     <constraint firstAttribute="trailingMargin" secondItem="AGk-8u-zoN" secondAttribute="trailing" id="0xN-aM-EfZ"/>
                     <constraint firstItem="AGk-8u-zoN" firstAttribute="top" secondItem="jva-1g-aJ4" secondAttribute="topMargin" id="8eZ-Sv-5Vy"/>
                     <constraint firstItem="6j3-oR-Pgi" firstAttribute="leading" secondItem="jva-1g-aJ4" secondAttribute="leadingMargin" id="9tR-bT-vbw"/>
-                    <constraint firstItem="RHN-Au-3ha" firstAttribute="top" secondItem="AGk-8u-zoN" secondAttribute="bottom" constant="5" id="9zp-dw-KzO"/>
+                    <constraint firstItem="RHN-Au-3ha" firstAttribute="top" relation="greaterThanOrEqual" secondItem="AGk-8u-zoN" secondAttribute="bottom" constant="5" id="9zp-dw-KzO"/>
                     <constraint firstItem="RHN-Au-3ha" firstAttribute="leading" secondItem="6j3-oR-Pgi" secondAttribute="trailing" constant="10" id="KPP-yD-boD"/>
                     <constraint firstItem="AGk-8u-zoN" firstAttribute="leading" secondItem="6j3-oR-Pgi" secondAttribute="trailing" constant="10" id="KqS-vi-BAa"/>
-                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="RHN-Au-3ha" secondAttribute="bottom" constant="10" id="YXY-uz-aMP"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="RHN-Au-3ha" secondAttribute="bottom" constant="10" id="YXY-uz-aMP"/>
                     <constraint firstItem="6j3-oR-Pgi" firstAttribute="top" secondItem="jva-1g-aJ4" secondAttribute="topMargin" id="aPk-AF-kPB"/>
                     <constraint firstItem="6j3-oR-Pgi" firstAttribute="bottom" secondItem="jva-1g-aJ4" secondAttribute="bottomMargin" id="kr0-NQ-Yqe"/>
                     <constraint firstItem="RHN-Au-3ha" firstAttribute="trailing" secondItem="jva-1g-aJ4" secondAttribute="trailingMargin" id="vJF-nJ-CFi"/>

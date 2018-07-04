@@ -25,12 +25,12 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
     
     // MARK: - Constant Properties
     
-    internal let searchController = UISearchController(searchResultsController: nil)
-    internal let disposableBag = DisposeBag()
+    private let searchController = UISearchController(searchResultsController: nil)
+    private let disposableBag = DisposeBag()
     
     // MARK: - Properties
     
-    internal let viewModel = ProductListViewModel() 
+    private let viewModel = ProductListViewModel() 
     
     // MARK: Lifecycle
     

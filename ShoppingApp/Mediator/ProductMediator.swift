@@ -10,27 +10,40 @@ import Foundation
 import UIKit
 import RxSwift
 
+typealias SENDER = [String: Any]
+
+// MARK: - View Controllers Protocols
+
 protocol ProductDetailProtocol: class {
     var product: ProductDetail? { get }
     func showProductDetails(product: Product)
 }
 
-protocol ProductPageProtocol: class {
-    func observableDatasouce(_ observable: Observable<[String]>)
+protocol SegueWithObservableSender: class {
+    func observableDatasouce<T>(_ observable: Observable<[T]>)
+}
+
+protocol ProductPageProtocol: SegueWithObservableSender {
 }
 
 protocol ProductImageProtocol: class {
     var productImage: String { get set }
 }
 
+protocol RecommendationsProtocol: SegueWithObservableSender {
+}
+
+// MARK: - Product Mediator Implementation
+
 struct ProductMediator: MediatorProtocol {
-    func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print(segue.identifier ?? "")
-    }
     
-    func prepare(for segue: UIStoryboardSegue, sender: Observable<[String]>) {
-        if let destinationVC = segue.destination as? ProductPageProtocol {
-            destinationVC.observableDatasouce(sender)
+    func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? ProductPageProtocol, let sender = sender as? SENDER {
+            guard let observable = sender[String(describing: ProductPageProtocol.self)] as? Observable<[String]> else { return }
+            destinationVC.observableDatasouce(observable)
+        } else if let destinationVC = segue.destination as? RecommendationsProtocol, let sender = sender as? SENDER {
+            guard let observable = sender[String(describing: RecommendationsProtocol.self)] as? Observable<[Int]> else { return }
+            destinationVC.observableDatasouce(observable)
         }
     }
 }

@@ -25,7 +25,11 @@ class ProductDetailViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        self._mediator.prepare(for: segue, sender: self._viewModel.productImages)
+        let productImagesProtocol = String(describing: ProductPageProtocol.self)
+        let recommendationsProtocol = String(describing: RecommendationsProtocol.self)
+        let values: [String : Any] = [productImagesProtocol: self._viewModel.productImages,
+                      recommendationsProtocol: self._viewModel.recommendations]
+        self._mediator.prepare(for: segue, sender: values)
     }
     
     // MARK: - Private Functions
@@ -33,7 +37,6 @@ class ProductDetailViewController: UIViewController {
     private var customView: ProductDetailView {
         return self.view as! ProductDetailView
     }
-    
     
     private func bindFields() {
         self._viewModel.productName.bind(to: self.customView.productNameLabel.rx.text).disposed(by: self._disposeBag)

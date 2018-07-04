@@ -28,6 +28,9 @@
 		BC6FDD8820E2835300297850 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC6FDD8720E2835300297850 /* Assets.xcassets */; };
 		BC6FDD8B20E2835300297850 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC6FDD8920E2835300297850 /* LaunchScreen.storyboard */; };
 		BC6FDDA120E2835300297850 /* ShoppingAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6FDDA020E2835300297850 /* ShoppingAppUITests.swift */; };
+		BC7FD08520EC851800CDFD2B /* RecommendationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7FD08420EC851800CDFD2B /* RecommendationCollectionViewCell.swift */; };
+		BC7FD08820EC866B00CDFD2B /* RecommendationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7FD08720EC866B00CDFD2B /* RecommendationListViewModel.swift */; };
+		BC7FD08A20EC961D00CDFD2B /* RecommendationCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7FD08920EC961D00CDFD2B /* RecommendationCellViewModel.swift */; };
 		BC97C1BA20E2A74100D9A392 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC97C1B920E2A74100D9A392 /* Alamofire.framework */; };
 		BC97C1C320E2C13A00D9A392 /* URLSessionConfiguration+ExtraHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97C1C020E2C13A00D9A392 /* URLSessionConfiguration+ExtraHeaders.swift */; };
 		BC97C1C420E2C13A00D9A392 /* AlamofireRequest+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97C1C120E2C13A00D9A392 /* AlamofireRequest+Decodable.swift */; };
@@ -105,6 +108,9 @@
 		BC6FDD9C20E2835300297850 /* ShoppingAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShoppingAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC6FDDA020E2835300297850 /* ShoppingAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingAppUITests.swift; sourceTree = "<group>"; };
 		BC6FDDA220E2835300297850 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC7FD08420EC851800CDFD2B /* RecommendationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationCollectionViewCell.swift; sourceTree = "<group>"; };
+		BC7FD08720EC866B00CDFD2B /* RecommendationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationListViewModel.swift; sourceTree = "<group>"; };
+		BC7FD08920EC961D00CDFD2B /* RecommendationCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationCellViewModel.swift; sourceTree = "<group>"; };
 		BC97C1B920E2A74100D9A392 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		BC97C1C020E2C13A00D9A392 /* URLSessionConfiguration+ExtraHeaders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSessionConfiguration+ExtraHeaders.swift"; sourceTree = "<group>"; };
 		BC97C1C120E2C13A00D9A392 /* AlamofireRequest+Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlamofireRequest+Decodable.swift"; sourceTree = "<group>"; };
@@ -274,6 +280,23 @@
 			path = ShoppingAppUITests;
 			sourceTree = "<group>";
 		};
+		BC7FD08320EC850600CDFD2B /* Recommendations */ = {
+			isa = PBXGroup;
+			children = (
+				BC7FD08420EC851800CDFD2B /* RecommendationCollectionViewCell.swift */,
+			);
+			path = Recommendations;
+			sourceTree = "<group>";
+		};
+		BC7FD08620EC865800CDFD2B /* Recommendation */ = {
+			isa = PBXGroup;
+			children = (
+				BC7FD08720EC866B00CDFD2B /* RecommendationListViewModel.swift */,
+				BC7FD08920EC961D00CDFD2B /* RecommendationCellViewModel.swift */,
+			);
+			path = Recommendation;
+			sourceTree = "<group>";
+		};
 		BC97C1B820E2A74100D9A392 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -373,6 +396,7 @@
 		BC97C1F420E2CBA900D9A392 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				BC7FD08620EC865800CDFD2B /* Recommendation */,
 				BCDB162220E441C00094DCA2 /* Product */,
 			);
 			path = ViewModel;
@@ -382,6 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				BCDA01E020E6C617009D4A59 /* Base */,
+				BC27E0CC20EB2E90006290CC /* Recommendations */,
 				BC97C1F720E2E4BA00D9A392 /* Product */,
 			);
 			path = ViewController;
@@ -390,6 +415,7 @@
 		BC97C1F620E2CBBF00D9A392 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BC7FD08320EC850600CDFD2B /* Recommendations */,
 				BC97C23C20E42F5100D9A392 /* Product */,
 			);
 			path = View;
@@ -398,7 +424,6 @@
 		BC97C1F720E2E4BA00D9A392 /* Product */ = {
 			isa = PBXGroup;
 			children = (
-				BC27E0CC20EB2E90006290CC /* Recommendations */,
 				BC27E0B820EAD979006290CC /* ImageCarousel */,
 				BC33CBF520EA69D700F85292 /* List */,
 				BC97C23620E2EDDB00D9A392 /* Detail */,
@@ -629,11 +654,13 @@
 				BC97C1EB20E2C15500D9A392 /* HTTPRouteConvertible.swift in Sources */,
 				BC27E0BA20EAD9D4006290CC /* ProductPageViewController.swift in Sources */,
 				BC97C1C520E2C13A00D9A392 /* Alamofire+ExtraHeaders.swift in Sources */,
+				BC7FD08A20EC961D00CDFD2B /* RecommendationCellViewModel.swift in Sources */,
 				BCDA01E220E6C630009D4A59 /* BaseViewController.swift in Sources */,
 				BC97C1E420E2C15500D9A392 /* CBClientDelegate.swift in Sources */,
 				BC27E0CE20EB2EB8006290CC /* RecommendedCollectionViewController.swift in Sources */,
 				BC97C1C420E2C13A00D9A392 /* AlamofireRequest+Decodable.swift in Sources */,
 				BC97C1F920E2E4D200D9A392 /* ProductTableViewController.swift in Sources */,
+				BC7FD08820EC866B00CDFD2B /* RecommendationListViewModel.swift in Sources */,
 				BC97C1C320E2C13A00D9A392 /* URLSessionConfiguration+ExtraHeaders.swift in Sources */,
 				BC97C1E120E2C15500D9A392 /* CBClientError.swift in Sources */,
 				BC27E0AF20EAC972006290CC /* Product.swift in Sources */,
@@ -647,6 +674,7 @@
 				BC27E0B120EAC987006290CC /* Specification.swift in Sources */,
 				BC97C1ED20E2C15500D9A392 /* CBClientType.swift in Sources */,
 				BC97C1EC20E2C15500D9A392 /* HTTPBaseURL.swift in Sources */,
+				BC7FD08520EC851800CDFD2B /* RecommendationCollectionViewCell.swift in Sources */,
 				BC97C1EE20E2C15500D9A392 /* SearchClient.swift in Sources */,
 				BCDB162420E442A20094DCA2 /* ProductListViewModel.swift in Sources */,
 				BCDA01E420E6ECFE009D4A59 /* ProductClient.swift in Sources */,

@@ -11,14 +11,14 @@ import RxSwift
 
 class ProductListViewModel {
     
-    // MARK: Internal Vars
+    // MARK: private Vars
     
-    internal var currentPage: Int = 1
-    internal var totalPages: Int = 1
-    internal let client = SearchClient()
-    internal let disposedBag = DisposeBag()
-    internal var isTotalPagesAchieved: Bool {
-        return currentPage > totalPages
+    private var _currentPage: Int = 1
+    private var _totalPages: Int = 1
+    private let _client = SearchClient()
+    private let _disposedBag = DisposeBag()
+    private var _isTotalPagesAchieved: Bool {
+        return _currentPage > _totalPages
     }
     
     // MARK: Private Properties
@@ -26,14 +26,14 @@ class ProductListViewModel {
     private var _allProducts = [Product]()
     private let _products = Variable<[Product]>([])
     private let _filteredProducts = Variable<[Product]>([])
-    private let _isLoading = Variable(false)
     private let _isFiltering = Variable(false)
+    private let _isLoading = Variable(false)
     private let _error = PublishSubject<Error>()
     
     // MARK: Constructors
     
     init(productList: ProductList) {
-        self.totalPages = productList.pageCount
+        self._totalPages = productList.pageCount
         self.updateDataSource(productList: productList)
     }
     
@@ -66,8 +66,8 @@ class ProductListViewModel {
     // MARK: - Private Functions
     
     private func updateViewModel(productList: ProductList) {
-        self.currentPage = productList.currentPage
-        self.totalPages = productList.pageCount
+        self._currentPage = productList.currentPage
+        self._totalPages = productList.pageCount
     }
     
     private func filter(query: String) {
@@ -81,7 +81,7 @@ class ProductListViewModel {
     }
     
     private func updateDataSource(productList: ProductList) {
-        self.totalPages = productList.pageCount
+        self._totalPages = productList.pageCount
         self._allProducts.append(contentsOf: productList.products)
         self._products.value.append(contentsOf: productList.products)
     }
@@ -97,17 +97,17 @@ class ProductListViewModel {
     }
     
     func getProducts(query: String = "") {
-        if (isTotalPagesAchieved) { return }
+        if (_isTotalPagesAchieved) { return }
         
         self._isLoading.value = true
-        self.client?.getProducts(page: self.currentPage, query: query).subscribe(onNext: { [weak self] (productList) in
+        self._client?.getProducts(page: self._currentPage, query: query).subscribe(onNext: { [weak self] (productList) in
             guard let weakSelf = self else { return }
             weakSelf.updateDataSource(productList: productList)
-            weakSelf.currentPage += 1
+            weakSelf._currentPage += 1
         }, onError: { (error) in
             self._error.onNext(error)
         }, onCompleted: {
             self._isLoading.value = false
-        }).disposed(by: self.disposedBag)
+        }).disposed(by: self._disposedBag)
     }
 }
