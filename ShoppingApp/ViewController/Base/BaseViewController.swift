@@ -56,7 +56,9 @@ extension BaseViewControllerProtocol {
         guard let controller = self as? UIViewController else { return }
         guard let customError = error as? CustomErrorConvertible else { return }
         
-        let alert = UIAlertController.init(title: "Ops!", message: customError.userLocalizedMessage, preferredStyle: .alert)
+        let rootError = customError.childError?.rootError()
+        
+        let alert = UIAlertController.init(title: "Ops!", message: rootError?.localizedFailureReason, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .cancel) { (action) in
             alert.dismiss(animated: true, completion: nil)
         }

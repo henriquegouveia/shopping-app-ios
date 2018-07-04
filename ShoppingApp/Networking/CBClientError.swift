@@ -9,10 +9,10 @@
 import Foundation
 import Alamofire
 
-enum CBClientError: CustomErrorConvertible {
-
+enum CBClientError: CustomErrorConvertible {    
+    
     case Unknown(HTTPURLResponse?, Data?, CustomErrorConvertible)
-    case SerializationError(CustomErrorConvertible)
+    case SerializationError(CBSerializationError)
     case ServerError(CBServerError)
     case InternetConnectionError(CustomErrorConvertible)
     case AlamofireError(CustomErrorConvertible)
@@ -24,13 +24,34 @@ enum CBClientError: CustomErrorConvertible {
                 return
             }
         }
-
-        let error = error as! CustomErrorConvertible
-       
-        if let _ = AlamofireErrorCode(rawValue: error.code) {
-            self = .AlamofireError(error)
+        
+        if let decodedError = error as? DecodingError {
+            var errorContext: DecodingError.Context
+            
+            switch decodedError {
+            case .dataCorrupted(let context):
+                errorContext = context
+                break
+            case .keyNotFound(_, let context):
+                errorContext = context
+                break
+            case .typeMismatch(_, let context):
+                errorContext = context
+                break
+            case .valueNotFound(_, let context):
+                errorContext = context
+            }
+            
+            self = .SerializationError(CBSerializationError(error: errorContext))
         } else {
-            self = .Unknown(response, data, error)
+            
+            let localError = error as? CustomErrorConvertible
+            
+            if let _ = AlamofireErrorCode(rawValue: localError?.code ?? -1009) {
+                self = .AlamofireError(localError!)
+            } else {
+                self = .Unknown(response, data, localError!)
+            }
         }
     }
     
@@ -45,9 +66,9 @@ enum CBClientError: CustomErrorConvertible {
     }
     
     var domain: String {
-        return "com.abi"
+        return "com.coolblue"
     }
-
+    
     var childError: CustomErrorConvertible? {
         switch self {
         case .Unknown(_, _, let err): return err
@@ -62,3 +83,26 @@ enum CBClientError: CustomErrorConvertible {
 enum AlamofireErrorCode: Int {
     case InternetConnectionError = -1009
 }
+
+struct CBSerializationError: CustomErrorConvertible {
+    
+    init(error: DecodingError.Context) {
+        self.description = error.debugDescription
+        self.localizedFailureReason = error.debugDescription
+        error.codingPath.forEach { (codekey) in
+            self.userInfo[String(codekey.intValue ?? 0)] = codekey.debugDescription
+        }
+    }
+    
+    var domain: String {
+        return "com.coolblue.servererror"
+    }
+    
+    var code: Int {
+        return -1
+    }
+    var localizedFailureReason: String?
+    var description: String
+    var userInfo: [String : Any] = [:]
+}
+

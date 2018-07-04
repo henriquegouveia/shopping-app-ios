@@ -19,26 +19,13 @@ let userLocalizedErrorTitleKey: String = "UserLocalizedErrorTitleKey"
  */
 protocol CustomErrorConvertible: Error, CustomStringConvertible {
     
-    // [Required]
-    
-    /// The error's domain.
     var domain: String { get }
-    
-    /// The error's code.
     var code: Int { get }
 
     // [Opcional]
-    
-    /// A localized and friendly title of this error. You can show this title to the user.
+
     var userLocalizedTitle: String? { get }
-    
-    /// A localized and friendly message of this error. You can show this message to the user.
-    var userLocalizedMessage: String? { get }
-    
-    /// The failure reason of this error
     var localizedFailureReason: String? { get }
-    
-    /// The error's userInfo.
     var userInfo: [String : Any] { get }
     
     /// An NSError equivalent.
@@ -55,15 +42,6 @@ extension CustomErrorConvertible {
         return nil
     }
     
-    var userLocalizedMessage: String? {
-//        let json = JSON(userInfo)
-//        if let data = json[ServerErrorJSONSchema.dataKey].dictionary, let message = data[ServerErrorJSONSchema.messageKey] {
-//            return message.string
-//        }
-//        
-        return nil
-    }
-    
     var localizedFailureReason: String? {
         return nil
     }
@@ -76,16 +54,16 @@ extension CustomErrorConvertible {
         return NSError(domain: domain, code: code, userInfo: userInfo)
     }
     
-    var childError: CustomErrorConvertible? {
-        return nil
-    }
-    
     var description: String {
         return "\(domain), code: \(code), userInfo: \(userInfo)"
     }
 }
 
 extension CustomErrorConvertible {
+    
+    var childError: CustomErrorConvertible? {
+        return nil
+    }
     
     /**
      childError's recursion until nil.
@@ -98,10 +76,6 @@ extension CustomErrorConvertible {
     
     func userLocalizedTitleUnwrapped() -> String {
         return userLocalizedTitle ?? "GenericErrorTitle"
-    }
-    
-    func userLocalizedMessageUnwrapped() -> String {
-        return userLocalizedMessage ?? "GenericErrorMessage"
     }
 
 }

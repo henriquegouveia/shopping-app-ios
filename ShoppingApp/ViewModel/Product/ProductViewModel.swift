@@ -33,6 +33,7 @@ class ProductViewModel {
     private let _deliveredWith = Variable<String>("")
     private let _hideNextDayDelivery = Variable(false)
     private let _productImages = Variable<[String]>([])
+    private let _recommendations = Variable<[Int]>([])
     private let _disposeBag = DisposeBag()
     
     // MARK: - Public vars
@@ -65,6 +66,10 @@ class ProductViewModel {
         return self._productImages.asObservable()
     }
     
+    var recommendations: Observable<[Int]> {
+        return self._recommendations.asObservable()
+    }
+    
     var isLoading: Observable<Bool> {
         return self._isLoading.asObservable()
     }
@@ -75,6 +80,8 @@ class ProductViewModel {
         self._productName.value = ""
         self._price.value = ""
         self._productText.value = ""
+        self._deliveredWith.value = ""
+        self._recommendations.value = []
         self._productImages.value = []
     }
     
@@ -102,6 +109,7 @@ class ProductViewModel {
         self._productText.value = product.productText ?? ""
         self._deliveredWith.value = self.formattedDeliveryWith(deliveredWith: product.deliveredWith)
         self._productImages.value = product.productImages ?? []
+        self._recommendations.value = product.recommendedAccessories ?? []
     }
     
     private func formattedDeliveryWith(deliveredWith: [String?]?) -> String {
