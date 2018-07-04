@@ -2,7 +2,7 @@
 
 ![Apps](screenshots/apps.png)
 
-## The Architecture
+## The Structure Pattern
 
 ![AppCenter](screenshots/mvvm.png)
 
