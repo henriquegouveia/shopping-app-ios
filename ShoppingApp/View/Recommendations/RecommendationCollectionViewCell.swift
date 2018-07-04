@@ -41,8 +41,11 @@ class RecommendationCollectionViewCell: UICollectionViewCell {
     }
     
     private func downloadImage(imageURL: String) {
+        var options = ImageLoadingOptions(placeholder: #imageLiteral(resourceName: "placeholder"))
+        options.isPrepareForReuseEnabled = true
+        
         guard let url = URL(string: imageURL) else { return }
-        Nuke.loadImage(with: url, into: self.productImageView)
+        Nuke.loadImage(with: url, options: options, into: self.productImageView)
     }
 }
 
@@ -50,8 +53,6 @@ class RecommendationCollectionViewCell: UICollectionViewCell {
 
 extension RecommendationCollectionViewCell: RecommendationCellProtocol {
     func loadData(item: Int) {
-        self.productImageView.image = nil
-        self.priceLabel.text = nil
         self._viewModel = RecommendationCellViewModel(productId: item)
     }
 }

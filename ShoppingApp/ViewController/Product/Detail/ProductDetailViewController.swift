@@ -49,6 +49,7 @@ class ProductDetailViewController: UIViewController {
             isLoading ? weakSelf.customView.activityIndicator.startAnimating() : weakSelf.customView.activityIndicator.stopAnimating()
             weakSelf.customView.loadingView.isHidden = !isLoading
         }).disposed(by: self._disposeBag)
+        self._viewModel.isLoading.bind(to: self.customView.deliveredByLabel.rx.isHidden).disposed(by: self._disposeBag)
         
     }
 

@@ -75,15 +75,23 @@ class ProductTableViewController: UITableViewController, BaseViewControllerProto
         viewModel.products.bind(to: tableView.rx.items(cellIdentifier: String(describing: ProductTableViewCell.self),
                                          cellType: ProductTableViewCell.self)) { index, product, cell in
                                             cell.loadData(product: product)
+                                            self.selectFirstRow()
             }
             .disposed(by: self.disposableBag)
     }
     
     private func selectFirstRow() {
-        let indexPath = IndexPath(row: 0, section: 0)
-        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
+        guard let _ = self.tableView.indexPathForSelectedRow else {
+            let indexPath = IndexPath(row: 0, section: 0)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                guard let weakSelf = self else { return }
+                weakSelf.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
+            }
+            
+            return
+        }
     }
-    
+
     private func configureTableViewDelegate() {
         self.tableView.rx.modelSelected(Product.self).subscribe(onNext: { [weak self] (product) in
             guard let weakSelf = self else { return }
