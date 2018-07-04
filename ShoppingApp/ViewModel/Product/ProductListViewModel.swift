@@ -17,6 +17,9 @@ class ProductListViewModel {
     internal var totalPages: Int = 1
     internal let client = SearchClient()
     internal let disposedBag = DisposeBag()
+    internal var isTotalPagesAchieved: Bool {
+        return currentPage > totalPages
+    }
     
     // MARK: Private Properties
     
@@ -30,9 +33,8 @@ class ProductListViewModel {
     // MARK: Constructors
     
     init(productList: ProductList) {
-        self.currentPage = productList.currentPage
-        self.totalPages = productList.totalResults
-        self.updateDataSource(products: productList.products)
+        self.totalPages = productList.pageCount
+        self.updateDataSource(productList: productList)
     }
     
     // MARK: Public Vars
@@ -47,6 +49,10 @@ class ProductListViewModel {
     
     var error: Observable<Error> {
         return self._error.asObservable()
+    }
+    
+    var endIndex: Int {
+        return (self._products.value.count - 1)
     }
     
     let title = NSLocalizedString("Products", comment: "")
@@ -74,9 +80,10 @@ class ProductListViewModel {
         }
     }
     
-    private func updateDataSource(products: [Product]) {
-        self._allProducts.append(contentsOf: products)
-        self._products.value.append(contentsOf: products)
+    private func updateDataSource(productList: ProductList) {
+        self.totalPages = productList.pageCount
+        self._allProducts.append(contentsOf: productList.products)
+        self._products.value.append(contentsOf: productList.products)
     }
     
     // MARK: - Public Functions
@@ -89,11 +96,13 @@ class ProductListViewModel {
         self.filter(query: query)
     }
     
-    func getProducts(query: String) {
+    func getProducts(query: String = "") {
+        if (isTotalPagesAchieved) { return }
+        
         self._isLoading.value = true
         self.client?.getProducts(page: self.currentPage, query: query).subscribe(onNext: { [weak self] (productList) in
             guard let weakSelf = self else { return }
-            weakSelf.updateDataSource(products: productList.products)
+            weakSelf.updateDataSource(productList: productList)
             weakSelf.currentPage += 1
         }, onError: { (error) in
             self._error.onNext(error)
